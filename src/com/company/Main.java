@@ -13,5 +13,4 @@ public class Main {
         frame.setVisible(true);
     }
     // testing
-    // This should only be in test branch
 }
