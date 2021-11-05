@@ -18,7 +18,6 @@ public class mainForm extends JPanel {
 
         input = new JTextField();
         add(input);
-        //test
 
     }
 
@@ -32,6 +31,7 @@ public class mainForm extends JPanel {
             // Retrieves the numbers typed in the text fields, converts them to an integer, and stores them in their
             // corresponding local variable.
             data = Integer.parseInt(input.getText());
+            System.out.println(data);
         }
     }
 }
