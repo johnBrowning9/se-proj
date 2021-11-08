@@ -39,22 +39,46 @@ public class DataBase {
         }
     }
 
-    private void select() {
+    /**
+     * Retrieves data from database
+     */
+    private void select() throws SQLException {
+        //ResultSet rs = stmt.executeQuery("Select signs from id"); //Retrieve data
+        //System.out.println(rs);
+        //sql = "SELECT * FROM signs WHERE description like '%Marker%'";
+        sql = "SELECT * FROM signs";
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.print(rs);
+    }
+
+    /**
+     * Retrieves data from database
+     * @param desc
+     */
+    private void select(String desc) throws SQLException {
+        //ResultSet rs = stmt.executeQuery("Select signs from id"); //Retrieve data
+        //System.out.println(rs);
+        sql = "SELECT * FROM signs WHERE description like " + desc;
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.print(rs);
+
+        //Extract data from result set (FIX THIS)
+        /*int inStock = 0;
+        int id = 0;
+        while(rs.next()){
+            //Retrieve by column name
+            id  = rs.getInt("id");
+            String signNumber = rs.getString("number");
+            String description = rs.getString("description");
+            //int catregory = rs.getInt("category");
+            String text = rs.getString("text");
+            inStock = rs.getInt("inStock");*/
+    }
+
+    public static void main(String[] args) throws SQLException {
+        DataBase base = new DataBase();
+        base.select();
 
     }
 
-    // This stuff is just to give you an idea on how to go about writing these sql calls.
-
-    private void delete(String tableName,String id ) {
-        sql = String.format("DELETE FROM % WHERE id='id'", tableName); // this is how you can insert variables into the sql calls.
-                                                                                // the variable tableName goes in place of the %
-                                                                                // I am not sure what our table names are or what properties
-                                                                                // we have to work with but this is how we will be accessing the database.
-                                                // we will need to figure out a way to plug in what variables we want into these sql strings. "id" variable is currently
-                                            // not being passed in, in this state. Maybe simple string concatenation will work best instead of String.format
-    }
-
-    private void getInventory() {
-        sql = "SELECT * FROM signs"; // select all from signs table.
-    }
 }
