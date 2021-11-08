@@ -39,7 +39,46 @@ public class DataBase {
         }
     }
 
-    private void select() {
+    /**
+     * Retrieves data from database
+     */
+    private void select() throws SQLException {
+        //ResultSet rs = stmt.executeQuery("Select signs from id"); //Retrieve data
+        //System.out.println(rs);
+        //sql = "SELECT * FROM signs WHERE description like '%Marker%'";
+        sql = "SELECT * FROM signs";
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.print(rs);
+    }
+
+    /**
+     * Retrieves data from database
+     * @param desc
+     */
+    private void select(String desc) throws SQLException {
+        //ResultSet rs = stmt.executeQuery("Select signs from id"); //Retrieve data
+        //System.out.println(rs);
+        sql = "SELECT * FROM signs WHERE description like " + desc;
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.print(rs);
+
+        //Extract data from result set (FIX THIS)
+        /*int inStock = 0;
+        int id = 0;
+        while(rs.next()){
+            //Retrieve by column name
+            id  = rs.getInt("id");
+            String signNumber = rs.getString("number");
+            String description = rs.getString("description");
+            //int catregory = rs.getInt("category");
+            String text = rs.getString("text");
+            inStock = rs.getInt("inStock");*/
+    }
+
+    public static void main(String[] args) throws SQLException {
+        DataBase base = new DataBase();
+        base.select();
 
     }
+
 }
