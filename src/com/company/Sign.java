@@ -1,9 +1,12 @@
 package com.company;
 
+import java.util.ArrayList;
+
 public class Sign {
     private float price, height;
     private String type, language;
     private boolean usable, reserved;
+    private ArrayList<String> pickupDates;
 
 
 
@@ -28,6 +31,7 @@ public class Sign {
         this.language = language;
         this.usable = usable;
         this.reserved = reserved;
+        this.pickupDates = new ArrayList<>();
     }
 
     public String toString(){
@@ -83,6 +87,8 @@ public class Sign {
         return type;
     }
 
+    public ArrayList<String> getPickupDates(){ return pickupDates; }
+
 
     //Mutators
 
@@ -99,9 +105,7 @@ public class Sign {
         this.price = price;
     }
 
-    public void setReserved(boolean reserved) {
-        this.reserved = reserved;
-    }
+    public void setReserved(boolean reserved) { this.reserved = reserved; }
 
     public void setType(String type) {
         this.type = type;
@@ -110,4 +114,9 @@ public class Sign {
     public void setUsable(boolean usable){
         this.usable = usable;
     }
+
+    public void addPickupDate(String date) { pickupDates.add(date); }
+
+    public void removePickupDate(String date) { pickupDates.remove(date); }
+
 }
