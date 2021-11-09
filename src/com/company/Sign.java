@@ -6,7 +6,6 @@ public class Sign {
     private boolean usable, reserved;
 
 
-
     public static void main(String[] args){
         Sign stop = new Sign(10, 54, "Stop", "English", true, false);
         System.out.println(stop);
@@ -110,4 +109,39 @@ public class Sign {
     public void setUsable(boolean usable){
         this.usable = usable;
     }
+
+//    public void getInventory(){
+//        Boolean over = false;
+//        while(over != true) {
+//            //for(int i = signArray.length() -1)
+//            for(int i = 0; i < signArray.length(); i++){ //'signArray' is a placeholder variable name
+//                int signRes = 0;
+//                int signCount = 0;
+//                if(signArray.isUsable() == usable) {
+//                    signCount++;
+//                }
+//                else{
+//                    signCount = signCount;
+//                }
+//                if(signArray.isReserved() == reserved) {
+//                    signRes++;
+//                }
+//                else{
+//                    signRes = signRes;
+//                }
+//                //if(i == )
+//                //System.out.println("There are currently: " + signCount + "usable signs");
+//                System.out.println("Usable Signs: " + signCount);
+//                System.out.println("Reserved Signs: " + signRes);
+//                System.out.println("Available Signs: " + (signCount - signRes));
+//                over = true;
+//            }
+//        }
+//
+//    }
+
+
+
+
+
 }
