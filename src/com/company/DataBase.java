@@ -75,9 +75,32 @@ public class DataBase {
             inStock = rs.getInt("inStock");*/
     }
 
+    private void delete(String tableName,String id ) {
+        sql = String.format("DELETE FROM % WHERE id='id'", tableName); // this is how you can insert variables into the sql calls.
+        // the variable tableName goes in place of the %
+        // I am not sure what our table names are or what properties
+        // we have to work with but this is how we will be accessing the database.
+        // we will need to figure out a way to plug in what variables we want into these sql strings. "id" variable is currently
+        // not being passed in, in this state. Maybe simple string concatenation will work best instead of String.format
+    }
+
+    private void getInventory() {
+        sql = "SELECT * FROM signs"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery("SELECT * FROM signs");
+        System.out.println("id  number  description");
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            char number = rs.getString("number");
+            char description = rs.getString("description");
+            System.out.println(id+"   "+number+"    "+description);
+        }
+    }
+
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
         base.select();
+        base.getInventory();
         //
         //
 
