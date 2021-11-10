@@ -83,11 +83,30 @@ public class DataBase {
             System.out.println(id+"   "+number+"    "+description+"    "+category+"    "+length+"   "+width+"    "+text+"    "+language+"    "+inStock+"    "+price+"    "+isActive);
         }
     }
+    /**
+     * gets Inventory from categories Table
+     * get categories tells you the id # associated with what type of sign
+     * @throws SQLException
+     */
+    private void getCategories() throws SQLException {
+        sql = "SELECT * FROM categories"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.println(" ");
+        System.out.println("id description");
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String description = rs.getString("description");
+            System.out.println(id+"   "+description);
+        }
+    }
+
 
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
         //base.select();
         base.getSigns();
+        base.getCategories();
     }
 
 }
