@@ -41,38 +41,12 @@ public class DataBase {
 
     /**
      * Retrieves data from database
-     */
-    private void select() throws SQLException {
-        //ResultSet rs = stmt.executeQuery("Select signs from id"); //Retrieve data
-        //System.out.println(rs);
-        //sql = "SELECT * FROM signs WHERE description like '%Marker%'";
-        sql = "SELECT * FROM signs";
-        ResultSet rs = stmt.executeQuery(sql);
-        System.out.print(rs);
-    }
-
-    /**
-     * Retrieves data from database
      * @param desc
      */
     private void select(String desc) throws SQLException {
-        //ResultSet rs = stmt.executeQuery("Select signs from id"); //Retrieve data
-        //System.out.println(rs);
         sql = "SELECT * FROM signs WHERE description like " + desc;
         ResultSet rs = stmt.executeQuery(sql);
         System.out.print(rs);
-
-        //Extract data from result set (FIX THIS)
-        /*int inStock = 0;
-        int id = 0;
-        while(rs.next()){
-            //Retrieve by column name
-            id  = rs.getInt("id");
-            String signNumber = rs.getString("number");
-            String description = rs.getString("description");
-            //int catregory = rs.getInt("category");
-            String text = rs.getString("text");
-            inStock = rs.getInt("inStock");*/
     }
 
     private void delete(String tableName,String id ) {
@@ -84,24 +58,36 @@ public class DataBase {
         // not being passed in, in this state. Maybe simple string concatenation will work best instead of String.format
     }
 
-    private void getInventory() throws SQLException {
+    /**
+     * gets Inventory from signs Table
+     * @throws SQLException
+     */
+    private void getSigns() throws SQLException {
         sql = "SELECT * FROM signs"; // select all from signs table.
         ResultSet rs = stmt.executeQuery("SELECT * FROM signs");
         System.out.println(" ");
-        System.out.println("id  number  description");
+        System.out.println("id  number  description  category length width text language inStock price isActive");
 
         while (rs.next()) {
             int id = rs.getInt("id");
             String number = rs.getString("number");
             String description = rs.getString("description");
-            System.out.println(id+"   "+number+"    "+description);
+            int category = rs.getInt("category");
+            int length = rs.getInt("length");
+            int width = rs.getInt("width");
+            String text = rs.getString("text");
+            int language = rs.getInt("language");
+            int inStock = rs.getInt("inStock");
+            double price = rs.getDouble("price");
+            boolean isActive = rs.getBoolean("isActive");
+            System.out.println(id+"   "+number+"    "+description+"    "+category+"    "+length+"   "+width+"    "+text+"    "+language+"    "+inStock+"    "+price+"    "+isActive);
         }
     }
 
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
         //base.select();
-        base.getInventory();
+        base.getSigns();
     }
 
 }
