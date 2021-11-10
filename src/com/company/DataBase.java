@@ -84,26 +84,24 @@ public class DataBase {
         // not being passed in, in this state. Maybe simple string concatenation will work best instead of String.format
     }
 
-    private void getInventory() {
+    private void getInventory() throws SQLException {
         sql = "SELECT * FROM signs"; // select all from signs table.
         ResultSet rs = stmt.executeQuery("SELECT * FROM signs");
+        System.out.println(" ");
         System.out.println("id  number  description");
 
         while (rs.next()) {
             int id = rs.getInt("id");
-            char number = rs.getString("number");
-            char description = rs.getString("description");
+            String number = rs.getString("number");
+            String description = rs.getString("description");
             System.out.println(id+"   "+number+"    "+description);
         }
     }
 
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
-        base.select();
+        //base.select();
         base.getInventory();
-        //
-        //
-
     }
 
 }
