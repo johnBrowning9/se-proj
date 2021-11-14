@@ -18,7 +18,7 @@ public class DataBase {
     /**
      * Connects to the database
      */
-    private Connection openDatabase( ) {
+    private Connection openDatabase() {
         try {
             String myDriver = "org.gjt.mm.mysql.Driver";
 
@@ -59,12 +59,12 @@ public class DataBase {
     }
 
     /**
-     * gets Inventory from signs Table
+     * Prints signs Table
      * @throws SQLException
      */
     private void getSigns() throws SQLException {
         sql = "SELECT * FROM signs"; // select all from signs table.
-        ResultSet rs = stmt.executeQuery("SELECT * FROM signs");
+        ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
         System.out.println("id  number  description  category length width text language inStock price isActive");
 
@@ -84,10 +84,113 @@ public class DataBase {
         }
     }
 
+    /**
+     * Prints categories table
+     * @throws SQLException
+     */
+    private void getCategories() throws SQLException {
+        sql = "SELECT * FROM categories"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.println(" ");
+        System.out.println("id description");
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String description = rs.getString("description");
+            System.out.println(id+"   "+description);
+        }
+    }
+
+    /**
+     * print languages table
+     * @throws SQLException
+     */
+    private void getLanguages() throws SQLException {
+        sql = "SELECT * FROM languages"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.println(" ");
+        System.out.println("id  name");
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            System.out.println(id + "   " +name);
+        }
+    }
+
+    /**
+     * prints customers Table
+     * @throws SQLException
+     */
+    private void getCustomers() throws SQLException {
+        sql = "SELECT * FROM customers"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.println(" ");
+        System.out.println("id  name  isActive");
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            boolean isActive = rs.getBoolean("isActive");
+            System.out.println(id+"   "+name+"    "+isActive);
+        }
+    }
+
+    /**
+     * prints reservations Table
+     * @throws SQLException
+     */
+    private void getReservations() throws SQLException {
+        sql = "SELECT * FROM reservations"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.println(" ");
+        System.out.println("id  customer   sign   amount  requestedOn status  lastActivity");
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            int customer = rs.getInt("customer");
+            int sign = rs.getInt("sign");
+            int amount = rs.getInt("amount");
+            Date requestedOn = rs.getDate("requestedOn");
+            int status = rs.getInt("status");
+            Date lastActivity = rs.getDate("lastActivity");
+            System.out.println(id + "   " + customer + "    " + sign + "    " + amount + "    " + requestedOn + "   " + status + "    " + lastActivity);
+        }
+    }
+
+    /**
+     * prints statuses Table
+     * @throws SQLException
+     */
+    private void getStatuses() throws SQLException {
+        sql = "SELECT * FROM statuses"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.println(" ");
+        System.out.println("id  name");
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String name = rs.getString("name");
+            System.out.println(id + "   " + name);
+        }
+    }
+
+    /**
+     * prints all tables
+     * @throws SQLException
+     */
+    private void printAll() throws SQLException {
+        getSigns();
+        getCategories();
+        getLanguages();
+        getCustomers();
+        getReservations();
+        getStatuses();
+    }
+
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
-        //base.select();
-        base.getSigns();
+        base.printAll();
     }
 
 }
