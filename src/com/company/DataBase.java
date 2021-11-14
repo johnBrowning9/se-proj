@@ -2,17 +2,20 @@ package com.company;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DataBase {
     Connection conn;
     Statement stmt;
     String sql;     //holds the SQL instruction
+    ArrayList<String> array;
 
     public DataBase() throws SQLException {
         conn = openDatabase();
         stmt = null;
         sql = null;
         stmt = conn.createStatement(); //creates Statement object to execute SQL methods
+        array = null;
     }
 
     /**
@@ -41,21 +44,33 @@ public class DataBase {
 
     /**
      * Retrieves data from database
-     * @param desc
+     * @param table
      */
-    private void select(String desc) throws SQLException {
-        sql = "SELECT * FROM signs WHERE description like " + desc;
-        ResultSet rs = stmt.executeQuery(sql);
-        System.out.print(rs);
+    private void select(String table, String column) throws SQLException {
+        if(column.contains("all")) {
+            sql = "SELECT * FROM " + table;
+            ResultSet rs = stmt.executeQuery(sql);
+        }
+        else {
+            sql = "SELECT " + column + " FROM " + table;
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                array.add(rs.getString(column));
+            }
+        }
+        for (String x: array) {
+            System.out.println(x);
+        }
     }
 
-    private void delete(String tableName,String id ) {
-        sql = String.format("DELETE FROM % WHERE id='id'", tableName); // this is how you can insert variables into the sql calls.
-        // the variable tableName goes in place of the %
-        // I am not sure what our table names are or what properties
-        // we have to work with but this is how we will be accessing the database.
-        // we will need to figure out a way to plug in what variables we want into these sql strings. "id" variable is currently
-        // not being passed in, in this state. Maybe simple string concatenation will work best instead of String.format
+    /**
+     * Deletes data from database.
+     * @param table
+     * @param column
+     * @param condition
+     */
+    private void delete(String table, String column, String condition) {
+        sql = "DELETE FROM " + table + " WHERE " + column + "= '" + condition + "'";
     }
 
     /**
@@ -191,6 +206,7 @@ public class DataBase {
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
         base.printAll();
+        //base.select("signs", "description");
     }
 
 }
