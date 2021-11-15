@@ -1,0 +1,15 @@
+Index: se-proj/src/com/company/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.company;\n\nimport javax.swing.*;\n\npublic class Main {\n\n    public static void main(String[] args) {\n\t// write your code here\n        JFrame frame = new JFrame(\"City Sign Inventory Management\");\n        frame.setContentPane(new mainForm().panel1);\n        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\n        frame.pack();\n        frame.setVisible(true);\n    }\n    // testing\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- se-proj/src/com/company/Main.java	(revision 25846ac73c90c30252c3dd3c0132f45276e0bb59)
++++ se-proj/src/com/company/Main.java	(date 1634765598251)
+@@ -13,4 +13,5 @@
+         frame.setVisible(true);
+     }
+     // testing
++    //testing Lesli
+ }
