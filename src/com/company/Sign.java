@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Sign {
     private float price, height;
-    private int id, catagory, length, width, language, inStock, usable, reserved;
+    private int id, category, length, width, language, inStock, usable, reserved;
     private String description, number, text;
     private boolean isActive;
     private ArrayList<String> pickupDates;
@@ -15,7 +15,7 @@ public class Sign {
      * @param id the id of the sign
      * @param number
      * @param description description of the sign
-     * @param catagory catagory of the sign
+     * @param category category of the sign
      * @param length length of the sign
      * @param width width of the sign
      * @param text text of the sign
@@ -27,11 +27,11 @@ public class Sign {
      * @param usable indicates the number of still usable signs
      * @param reserved whether the sign has been reserved
      */
-    public Sign(int id, String number, String description, int catagory, int length, int width, String text,
+    public Sign(int id, String number, String description, int category, int length, int width, String text,
                 int language, int inStock, float price, boolean isActive, int height, int usable, int reserved){
         this.id = id;
         this.number = number;
-        this.catagory = catagory;
+        this.category = category;
         this.length = length;
         this.width = width;
         this.text = text;
@@ -107,8 +107,8 @@ public class Sign {
         return isActive;
     }
 
-    public int getCatagory() {
-        return catagory;
+    public int getCategory() {
+        return category;
     }
 
     public int getInStock() {
@@ -169,8 +169,8 @@ public class Sign {
         isActive = active;
     }
 
-    public void setCatagory(int catagory) {
-        this.catagory = catagory;
+    public void setCategory(int catagory) {
+        this.category = catagory;
     }
 
     public void setDescription(String description) {
