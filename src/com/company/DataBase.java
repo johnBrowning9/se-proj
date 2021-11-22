@@ -121,7 +121,7 @@ public class DataBase {
      * @throws SQLException
      */
     private void getLanguages() throws SQLException {
-        sql = "SELECT * FROM languages"; // select all from signs table.
+        sql = "SELECT * FROM languages"; // select all from languages table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
         System.out.println("id  name");
@@ -138,7 +138,7 @@ public class DataBase {
      * @throws SQLException
      */
     private void getCustomers() throws SQLException {
-        sql = "SELECT * FROM customers"; // select all from signs table.
+        sql = "SELECT * FROM customers"; // select all from customer table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
         System.out.println("id  name  isActive");
@@ -156,7 +156,7 @@ public class DataBase {
      * @throws SQLException
      */
     private void getReservations() throws SQLException {
-        sql = "SELECT * FROM reservations"; // select all from signs table.
+        sql = "SELECT * FROM reservations"; // select all from reservation table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
         System.out.println("id  customer   sign   amount  requestedOn status  lastActivity");
@@ -178,7 +178,7 @@ public class DataBase {
      * @throws SQLException
      */
     private void getStatuses() throws SQLException {
-        sql = "SELECT * FROM statuses"; // select all from signs table.
+        sql = "SELECT * FROM statuses"; // select all from statuses table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
         System.out.println("id  name");
@@ -203,10 +203,41 @@ public class DataBase {
         getStatuses();
     }
 
+    public String[][] signs() throws SQLException {
+        sql = "SELECT * FROM signs"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery(sql);
+        System.out.println(" ");
+        System.out.println("id  number  description  category length width text language inStock price isActive");
+
+        int i = 0;
+
+        while (rs.next()) {
+            i++;
+        }
+
+        String array[][] = new String[i][11];
+
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            String number = rs.getString("number");
+            String description = rs.getString("description");
+            int category = rs.getInt("category");
+            int length = rs.getInt("length");
+            int width = rs.getInt("width");
+            String text = rs.getString("text");
+            int language = rs.getInt("language");
+            int inStock = rs.getInt("inStock");
+            double price = rs.getDouble("price");
+            boolean isActive = rs.getBoolean("isActive");
+        }
+        return array;
+    }
+
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
         base.printAll();
         //base.select("signs", "description");
     }
+
 
 }
