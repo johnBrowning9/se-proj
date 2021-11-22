@@ -32,17 +32,19 @@ public class User {
         this.isActive = isActive;
     }
 
+
+
     /**
      * This function reserves a sign for the user if that sign is not already reserved.
      * Otherwise, it prints out a message saying that the sign is already reserved.
      * @param s The sign the user wants to reserve.
-     */
+     *//*
     public void reserveSign(Sign s) {
 
         //check if the user has permission to reserve signs
         if (permissions.get("reserveSign")) {
 
-            if (!s.isReserved()) {
+            if (s.getReserved() > 0) {
                 //user has permission
                 s.setReserved(true);
                 System.out.println("Sign Reserved!");
@@ -55,7 +57,7 @@ public class User {
             System.out.println("You do not have permission to reserve this sign.");
         }
     }
-
+*/
 
     //Accessors
 
