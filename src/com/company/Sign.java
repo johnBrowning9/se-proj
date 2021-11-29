@@ -3,7 +3,9 @@ package com.company;
 import java.util.ArrayList;
 
 public class Sign {
-    private float price, height;
+    //private float price, height;
+    private float height;
+    private double price;
     private String type, language;
     private boolean usable, reserved;
     private ArrayList<String> pickupDates;
@@ -24,7 +26,7 @@ public class Sign {
      * @param usable true if the sign is not damaged enough to be unusable
      * @param reserved true if the sign has been reserved for pickup
      */
-    public Sign(float price, float height, String type, String language, boolean usable, boolean reserved){
+    public Sign(double price, float height, String type, String language, boolean usable, boolean reserved){
         this.price = price;
         this.height = height;
         this.type = type;
@@ -33,6 +35,7 @@ public class Sign {
         this.reserved = reserved;
         this.pickupDates = new ArrayList<>();
     }
+
 
     public String toString(){
         String result = "";
@@ -75,7 +78,7 @@ public class Sign {
         return usable;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -101,7 +104,7 @@ public class Sign {
         this.language = language;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

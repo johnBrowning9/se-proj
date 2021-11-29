@@ -10,11 +10,17 @@ public class mainForm extends JPanel {
     private JTextField input;
     private int data;
 
+    private JButton button2;
+
     // Constructor
     public mainForm() {
         button = new JButton("Submit");
         add(button);
         button.addActionListener(new ButtonListener());  // Listener added for button.
+
+        button2 = new JButton();
+        add(button2);
+        button2.addActionListener(new ButtonListener());
 
         input = new JTextField();
         add(input);

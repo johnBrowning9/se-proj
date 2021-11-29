@@ -77,7 +77,7 @@ public class DataBase {
      * Prints signs Table
      * @throws SQLException
      */
-    private void getSigns() throws SQLException {
+    private void printSigns() throws SQLException {
         sql = "SELECT * FROM signs"; // select all from signs table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
@@ -103,7 +103,7 @@ public class DataBase {
      * Prints categories table
      * @throws SQLException
      */
-    private void getCategories() throws SQLException {
+    private void printCategories() throws SQLException {
         sql = "SELECT * FROM categories"; // select all from signs table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
@@ -120,7 +120,7 @@ public class DataBase {
      * print languages table
      * @throws SQLException
      */
-    private void getLanguages() throws SQLException {
+    private void printLanguages() throws SQLException {
         sql = "SELECT * FROM languages"; // select all from languages table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
@@ -137,7 +137,7 @@ public class DataBase {
      * prints customers Table
      * @throws SQLException
      */
-    private void getCustomers() throws SQLException {
+    private void printCustomers() throws SQLException {
         sql = "SELECT * FROM customers"; // select all from customer table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
@@ -155,7 +155,7 @@ public class DataBase {
      * prints reservations Table
      * @throws SQLException
      */
-    private void getReservations() throws SQLException {
+    private void printReservations() throws SQLException {
         sql = "SELECT * FROM reservations"; // select all from reservation table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
@@ -195,40 +195,81 @@ public class DataBase {
      * @throws SQLException
      */
     private void printAll() throws SQLException {
-        getSigns();
-        getCategories();
-        getLanguages();
-        getCustomers();
-        getReservations();
+        printSigns();
+        printCategories();
+        printLanguages();
+        printCustomers();
+        printReservations();
         getStatuses();
     }
 
-    public String[][] signs() throws SQLException {
-        sql = "SELECT * FROM signs"; // select all from signs table.
+    /**
+     * Creates an instance of a sign in the database.
+     * @param descr
+     * @return returns a sign object representative of the sign in the database
+     * @throws SQLException
+     */
+    public Sign getSign(String descr) throws SQLException {
+        Sign sign = new Sign(0,0,"0","0",false,false);
+
+        sql = "SELECT * FROM signs";
         ResultSet rs = stmt.executeQuery(sql);
-        System.out.println(" ");
-        System.out.println("id  number  description  category length width text language inStock price isActive");
 
-        int i = 0;
+        String description = "";
 
-        while (rs.next()) {
-            i++;
+        while(rs.next()) {
+            description = rs.getString("description");
+            if(descr.contains(description)) {
+                sign.setHeight(rs.getInt("length"));
+                sign.setPrice(rs.getDouble("price"));
+                sign.setLanguage(getLanguage(rs.getInt("language")));
+                sign.setType(description);
+                //did not add usable/ reserved
+                return sign;
+            }
         }
+        return null;
+    }
 
-        String array[][] = new String[i][11];
+    /**
+     * Returns the language that a particular sign is in.
+     * @param lang
+     * @return The language consistent with the id #
+     * @throws SQLException
+     */
+    private String getLanguage(int lang) throws SQLException {
+        sql = "SELECT * FROM languages"; // select all from languages table.
+        ResultSet rs = stmt.executeQuery(sql);
+
+        String language = "";
+        int id = 0;
+
+        while (rs.next() && lang != id) {
+            id = rs.getInt("id");
+            if (lang == id) {
+                language = rs.getString("name");
+            }
+        }
+        return language;
+    }
+
+    /**
+     * Gets a String array of the category table.
+     * @return an array with the category id number and description of category
+     * @throws SQLException
+     */
+    private String[][] getCategories() throws SQLException {
+        String array[][] = new String[2][1]; //3 units long and 2 unit wide
+        sql = "SELECT * FROM categories"; // select all from signs table.
+        ResultSet rs = stmt.executeQuery(sql);
 
         while (rs.next()) {
-            int id = rs.getInt("id");
-            String number = rs.getString("number");
-            String description = rs.getString("description");
-            int category = rs.getInt("category");
-            int length = rs.getInt("length");
-            int width = rs.getInt("width");
-            String text = rs.getString("text");
-            int language = rs.getInt("language");
-            int inStock = rs.getInt("inStock");
-            double price = rs.getDouble("price");
-            boolean isActive = rs.getBoolean("isActive");
+            int j = 0;
+            for (int i = 0; i <= 2; i++) {
+                array[i][j] = String.valueOf(rs.getInt("id"));
+                array[i][j + 1] = rs.getString("description");
+                j++;
+            }
         }
         return array;
     }
@@ -237,7 +278,8 @@ public class DataBase {
         DataBase base = new DataBase();
         base.printAll();
         //base.select("signs", "description");
+        Sign sign = new Sign(0,0,"0","0",false,false);
+        sign = base.getSign("Stop Sign");
     }
-
 
 }
