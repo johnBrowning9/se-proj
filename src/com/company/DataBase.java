@@ -69,8 +69,20 @@ public class DataBase {
      * @param column
      * @param condition
      */
-    private void delete(String table, String column, String condition) {
+    private void delete(String table, String column, String condition) throws SQLException {
         sql = "DELETE FROM " + table + " WHERE " + column + "= '" + condition + "'";
+        stmt.executeUpdate(sql);
+    }
+
+    /**
+     * Adds a new entry to the category table
+     * @param id
+     * @param description
+     */
+    private void addCategory(int id, String description) throws SQLException {
+        sql = "INSERT INTO categories (ID, description) VALUES ('" + id + "','"  + description + "')";
+        System.out.println(sql);
+        stmt.executeUpdate(sql);
     }
 
     /**
@@ -206,6 +218,17 @@ public class DataBase {
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
         base.printAll();
+
+        base.getCategories();
+        base.addCategory(4, "Construction Signs");
+        base.addCategory(5, "Other Signs");
+        base.getCategories();
+        base.delete("categories", "id", "4");
+        base.delete("categories", "description", "Other Signs");
+        base.getCategories();
+
+
+
         //base.select("signs", "description");
     }
 
