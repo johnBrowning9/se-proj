@@ -69,8 +69,9 @@ public class DataBase {
      * @param column
      * @param condition
      */
-    private void delete(String table, String column, String condition) {
+    private void delete(String table, String column, String condition) throws SQLException {
         sql = "DELETE FROM " + table + " WHERE " + column + "= '" + condition + "'";
+        ResultSet rs = stmt.executeQuery(sql);
     }
 
     /**
@@ -220,11 +221,11 @@ public class DataBase {
         while(rs.next()) {
             description = rs.getString("description");
             if(descr.contains(description)) {
+                sign.setUsable(rs.getBoolean("isActive"));
                 sign.setHeight(rs.getInt("length"));
                 sign.setPrice(rs.getDouble("price"));
                 sign.setLanguage(getLanguage(rs.getInt("language")));
                 sign.setType(description);
-                //did not add usable/ reserved
                 return sign;
             }
         }
