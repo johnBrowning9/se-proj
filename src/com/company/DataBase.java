@@ -82,6 +82,7 @@ public class DataBase {
         sql = "SELECT * FROM signs"; // select all from signs table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
+        System.out.println("Sign Table");
         System.out.println("id  number  description  category length width text language inStock price isActive");
 
         while (rs.next()) {
@@ -108,6 +109,7 @@ public class DataBase {
         sql = "SELECT * FROM categories"; // select all from signs table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
+        System.out.println("Category Table");
         System.out.println("id description");
 
         while (rs.next()) {
@@ -125,6 +127,7 @@ public class DataBase {
         sql = "SELECT * FROM languages"; // select all from languages table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
+        System.out.println("Language Table");
         System.out.println("id  name");
 
         while (rs.next()) {
@@ -142,6 +145,7 @@ public class DataBase {
         sql = "SELECT * FROM customers"; // select all from customer table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
+        System.out.println("Customer Table");
         System.out.println("id  name  isActive");
 
         while (rs.next()) {
@@ -160,6 +164,7 @@ public class DataBase {
         sql = "SELECT * FROM reservations"; // select all from reservation table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
+        System.out.println("Reservation Table");
         System.out.println("id  customer   sign   amount  requestedOn status  lastActivity");
 
         while (rs.next()) {
@@ -179,9 +184,11 @@ public class DataBase {
      * @throws SQLException
      */
     private void getStatuses() throws SQLException {
+
         sql = "SELECT * FROM statuses"; // select all from statuses table.
         ResultSet rs = stmt.executeQuery(sql);
         System.out.println(" ");
+        System.out.println("Status Table");
         System.out.println("id  name");
 
         while (rs.next()) {
@@ -278,9 +285,10 @@ public class DataBase {
     public static void main(String[] args) throws SQLException {
         DataBase base = new DataBase();
         base.printAll();
-        //base.select("signs", "description");
         Sign sign = new Sign(0,0,"0","0",false,false);
         sign = base.getSign("Stop Sign");
+        System.out.println ("");
+        System.out.println (sign.getHeight());
     }
 
 }
